@@ -27,19 +27,15 @@ services:
         condition: service_healthy
     networks:
       - orderdesk-net
-    expose:
-      - "8080"
     restart: unless-stopped
 
   nginx:
     image: nginx:alpine
     container_name: orderdesk-nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80"   
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./nginx/certs:/etc/nginx/certs:ro
     depends_on:
       - app
     networks:
@@ -51,4 +47,3 @@ volumes:
 
 networks:
   orderdesk-net:
-

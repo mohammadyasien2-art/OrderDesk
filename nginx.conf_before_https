@@ -5,15 +5,6 @@ upstream orderdesk_upstream {
 server {
     listen 80;
     server_name localhost;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name localhost;
-
-    ssl_certificate     /etc/nginx/certs/selfsigned.crt;
-    ssl_certificate_key /etc/nginx/certs/selfsigned.key;
 
     location / {
         proxy_pass http://orderdesk_upstream;
@@ -24,4 +15,3 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
-
